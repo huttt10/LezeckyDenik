@@ -1,0 +1,79 @@
+﻿@model RecordViewModel
+
+@{
+    ViewData["Title"] = "Vaše data";
+    ViewData["PieChart"] = "Rozložení všech záznamů pomocí obížnosti";
+    ViewData["LineChart"] = "Časové rozložení";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (!Model.Record.Count<Record>().Equals(0))
+{
+<div class="row">
+    <div class="col-6">
+
+        <table class="table table table-bordered table-striped" style="width:60%">
+        <thead>
+            <tr>
+                <th>
+                    Název
+                </th>
+                <th>
+                    Obtížnost
+                </th>
+                <th>
+                    Datum vylezení
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var obj in Model.Record)
+            {
+                <tr>
+                    <td>
+                        @obj.Name
+                    </td>
+                    <td>
+                        @obj.Difficulty
+                    </td>
+                    <td>
+                        @obj.DateRecord.ToString("d/M/yyyy")
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+ </div>
+
+    <div class="col-6">
+        <div>
+            @Html.Partial("_PieChart", Model.DifficultyAndCounts)
+
+            @Html.Partial("_LineChart", Model.DatesAndCounts)
+        </div>
+        <div>
+            <table class="table table table-bordered table-striped" style="width:110%">
+            @foreach(var statistic in Model.Statistics)
+            {
+                <br />
+                <tr>
+                    <td>
+                        Průměrná obtížnost vylezených cest: @statistic.Average
+                    </td>
+                    <td>
+                        Nejtěžší vylezená cesta: @statistic.Highest
+                    </td>
+                    <td>
+                        Počet vylezených cest: @statistic.Count
+                    </td>
+                </tr>
+            }
+            </table>
+        </div>
+    </div>
+</div>
+}
+

@@ -1,0 +1,88 @@
+﻿@model IEnumerable<LezeckyDenik.Models.Goal>
+
+@{
+    if(ViewBag.All == true)
+    {
+        ViewData["Title"] = "Všechny cíle";        
+    }
+    else
+    {
+        ViewData["Title"] = "Cíle tento rok";
+    }
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Vytvořit nový cíl</a>
+</p>
+<table class="table" style="width:60%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Average)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Highest)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Count)
+            </th>
+            <th  style="width:20%">
+            @if(ViewBag.All == true)
+            {
+                <text>Datum</text>
+            }
+            else
+            {
+                @Html.DisplayNameFor(model => model.Month)
+            } 
+            </th>
+            <th  style="width:20%">
+                @Html.DisplayNameFor(model => model.Achieved)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Average)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Highest)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Count)
+            </td>
+            <td>
+            @if(ViewBag.All == true)
+            {
+                @Html.DisplayFor(modelItem => item.Month.Year)
+                <text> </text>
+                @item.Month.ToString("MMMM", new System.Globalization.CultureInfo("cs-CZ"))
+            }
+            else
+            {                
+                @item.Month.ToString("MMMM", new System.Globalization.CultureInfo("cs-CZ"))
+            }
+            </td>
+            <td>
+                @if (item.Achieved == true)
+                {
+                    <i class="bi bi-check-lg"></i>
+                }
+                else
+                {
+                    <i class="bi bi-x-lg"></i>
+                }  
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<div>
+    <a class="btn btn-secondary" asp-action="Index" asp-route-sortOrder="All">Všechny cíle</a>
+    <a class="btn btn-dark" asp-action="Index">Tento rok</a>
+</div>

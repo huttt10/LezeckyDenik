@@ -1,0 +1,73 @@
+﻿@model List<LezeckyDenik.Models.ViewModels.ShowRolesViewModel>
+@{
+    ViewData["Title"] = "Nastavit role uživatelům a smazat uživatele";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+<hr />
+
+<div class="row">
+        <form asp-action="ShowRoles" method="get">
+            <div class="form-actions no-color">
+                <p>
+                    Najdi uživatele: <input type="text" name="Search" value="@ViewData["CurrentFilter"]" />
+                    <input type="submit" value="Search" class="btn btn-primary" /> |
+                    <a class="btn btn-secondary" asp-action="ShowRoles">Zobrazit celý seznam</a>
+                </p>
+            </div>
+        </form>
+</div>
+
+
+<table class="table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                Jméno
+            </th>
+            <th>
+                Současná role
+            </th>
+            <th class="d-flex justify-content-center">
+                Změnit roli
+            </th>            
+            @if(User.IsInRole(Role.RoleSuperAdmin))
+            {                
+                <th class="d-flex justify-content-center">
+                     Vymazat uživatele
+                </th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var obj in Model)
+        {
+            <tr>
+                <td>
+                    @obj.UserName
+                </td>
+                <td>
+                    @string.Join(" , ", obj.Roles.ToList())
+                </td>
+                <td class="d-flex justify-content-center">
+                    <a class="btn btn-primary" asp-controller="Admin" asp-action="ChangeRole" asp-route-userId="@obj.UserId">Změnit roli</a>
+                </td>
+                <div class="d-flex justify-content-center">
+                @if (User.IsInRole(Role.RoleSuperAdmin))
+                {
+                    <td class="d-flex justify-content-center">
+                        <a class="btn btn-dark" asp-controller="Admin" asp-action="DeleteUser" asp-route-userId="@obj.UserId"><i class="bi bi-x-octagon"></i></a>                    
+                    </td>
+                }
+                </div>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<div>
+    <a class="btn btn-dark" asp-action="Index">Zpět</a>
+</div>

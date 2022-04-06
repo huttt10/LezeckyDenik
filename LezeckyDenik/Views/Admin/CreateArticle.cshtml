@@ -1,0 +1,30 @@
+﻿@model Article
+
+@{
+    ViewData["Title"] = "Uprav článek";
+}
+
+<form asp-controller="Admin" asp-action="SaveArticle" method="post">
+    <input name="id" type="hidden" value="@Model.Id" />
+    <input name="title" type="text" placeholder="@Model.Title"/>
+    <div class="form-group">
+        <textarea id="editor" name="content" class="form-control" rows="20" height: 100%>
+            @Model.Content
+        </textarea>
+        <label>
+            Publikovat: @Html.CheckBoxFor(x => x.Published)
+        </label>
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Uložit</button>
+    </div>
+</form>
+
+@section Scripts {        
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="~/lib/Trumbowyg-main/dist/trumbowyg.js"></script>
+
+    <script>
+        $('#editor').trumbowyg();
+    </script>
+}

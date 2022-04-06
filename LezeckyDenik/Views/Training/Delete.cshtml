@@ -1,0 +1,63 @@
+﻿@model LezeckyDenik.Models.Training
+
+@{
+    ViewData["Title"] = "Vymazat";
+}
+
+
+<h3>Opravdu chcete smazat tento záznam?</h3>
+<div>
+    <h4>Tréninková jednotka</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Focus)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Focus)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.Raw(Model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Time)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Time)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IsDone)
+        </dt>
+        <dd class = "col-sm-10">
+            @if (Model.IsDone == true)
+            {
+                <i class="bi bi-check-lg"></i>
+            }
+            else
+            {
+                <i class="bi bi-x-lg"></i>
+            }             
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Vymazat" class="btn btn-danger" /> |
+        <a class="btn btn-secondary" asp-action="Index">Zpět</a>
+    </form>
+</div>

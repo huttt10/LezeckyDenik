@@ -1,0 +1,52 @@
+﻿@model LezeckyDenik.Models.Goal
+
+@{
+    ViewData["Title"] = "Vytvořit nový cíl";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h4>Goal</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Average" class="control-label"></label>
+                <br>
+                @Html.DropDownListFor(model => model.Average, new SelectList(Model.ChooseDifficulty, "Value", "Text"), new {@class="form-control"})
+                <span asp-validation-for="Average" class="text-danger"></span>                
+            </div>
+            <div class="form-group">
+                <label asp-for="Highest" class="control-label"></label>
+                <br>
+                @Html.DropDownListFor(model => model.Highest, new SelectList(Model.ChooseDifficulty, "Value", "Text"), new {@class="form-control"})
+                <span asp-validation-for="Highest" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Count" class="control-label"></label>
+                <input min="0" asp-for="Count" class="form-control" />
+                <span asp-validation-for="Count" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Month" class="control-label"></label>
+                <input min="@DateTime.UtcNow.ToString("yyyy-MM")" type="month" asp-for="Month" class="form-control" Value="@DateTime.Now"/>
+                <span asp-validation-for="Month" class="text-danger"></span>
+            </div>
+@*            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Achieved" /> @Html.DisplayNameFor(model => model.Achieved)
+                </label>
+            </div>*@
+            <div class="form-group">
+                <input type="submit" value="Vytvořit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="mt-1">
+    <a class="btn btn-dark btn-sm" asp-action="Index">Zpět</a>
+</div>
+

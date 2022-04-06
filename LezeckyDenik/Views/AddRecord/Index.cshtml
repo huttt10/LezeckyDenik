@@ -1,0 +1,34 @@
+﻿@model Record
+
+@{
+    ViewData["Title"] = "Přidat záznam";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">                                
+                <label asp-for="Difficulty" class="control-label"></label>
+                <br>
+                @Html.DropDownListFor(model => model.Difficulty, new SelectList(Model.ChooseDifficulty, "Value", "Text"), new {@class="form-control"})
+                <span asp-validation-for="Difficulty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateRecord" class="control-label"></label>
+                <input asp-for="DateRecord" class="form-control" value="@DateTime.Now"/>
+                <span asp-validation-for="DateRecord" class="text-danger"></span>
+            </div>
+                <button type="submit" class="btn btn-primary" >Přidat</button>
+        </form>
+    </div>
+</div>
+
