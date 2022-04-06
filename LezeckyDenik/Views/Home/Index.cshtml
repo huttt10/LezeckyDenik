@@ -1,0 +1,29 @@
+﻿@model MainPageViewModel
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="col-sm-3">
+    @Html.Raw(Model.MainPage.Content)
+</div>
+
+
+
+@foreach (var article in Model.Articles)
+{
+    <div class="col-sm-3">
+        <li>
+            <a class="btn btn-secondary btn-sm" asp-controller="Home" asp-action="Article" asp-route-title="@article.Title">@article.Title</a>
+        </li>
+    </div>
+}
+
+@if(Model.Articles.Any())
+{
+    <br />
+    <div class="col-sm-3">
+        <a class="btn btn-dark" asp-controller="Home" asp-action="ShowAllArticle">Všechny články</a>
+    </div>
+}
+

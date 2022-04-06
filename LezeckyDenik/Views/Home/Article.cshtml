@@ -1,0 +1,21 @@
+﻿@model Article
+@{
+    ViewData["Title"] = "Článek";
+}
+
+<div>
+    <h2>@Model.Title</h2>
+</div>
+<div>
+    @Html.Raw(Model.Content)
+</div>
+<div class="text-end">
+    <h5>Autor: @Model.User.UserName</h5>
+</div>
+
+<div>
+    <a class="btn btn-secondary" asp-controller="Home" asp-action="Index">Zpět na úvodní stránku</a>
+</div>
+
+
+

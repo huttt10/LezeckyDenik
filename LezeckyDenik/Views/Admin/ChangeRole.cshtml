@@ -1,0 +1,40 @@
+﻿@model LezeckyDenik.Models.ViewModels.ShowRolesViewModel
+@{
+    ViewData["Title"] = "Změna role";
+}
+
+
+
+<br />
+
+
+<form asp-action="ChangeRole" method="post">
+    <div class="card" style="max-width: 30rem;">
+        <div class="card-header">
+            <h2>@ViewData["Title"]</h2>
+            Jméno: @Model.UserName
+            <br />
+            @foreach (var role in Model.Roles)
+            {
+                <text>Současná role: </text> @role
+            }
+        </div>
+        <div class="card-body">
+                <div class="form-check m-1">
+                    <input type="hidden" asp-for="@Model.UserId" />
+                    <input type="hidden" asp-for="@Model.UserName" />
+                    @Html.DropDownListFor(model => model.ChooseRole, new SelectList(Model.ChooseRole, "Value", "Text"))
+                </div>            
+            <div asp-validation-summary="All" class="text-danger"></div>
+        </div>
+        <div class="card-footer">
+            <input type="submit" value="Změnit" class="btn btn-warning"
+                   style="width:auto" />
+            <a asp-action="ShowRoles" class="btn btn-dark" style="width:auto">Zpět</a>
+        </div>
+    </div>
+</form>
+
+
+
+

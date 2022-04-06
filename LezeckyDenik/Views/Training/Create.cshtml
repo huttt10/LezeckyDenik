@@ -1,0 +1,65 @@
+﻿@model LezeckyDenik.Models.Training
+
+@{
+    ViewData["Title"] = "Vytvořit";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h4>Tréninková jednotka</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" value="@DateTime.Now"/>
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Focus" class="control-label"></label>
+                <br>
+                @Html.DropDownListFor(model => model.Focus, new SelectList(Model.ChooseFocus, "Value", "Text"), new {@class="form-control"})
+                <span asp-validation-for="Focus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Time" class="control-label"></label>
+                <input asp-for="Time" class="form-control" value="00:00"/>
+                <span asp-validation-for="Time" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Note" class="control-label"></label>
+                <input asp-for="Note" class="form-control" />
+
+                <span asp-validation-for="Note" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsDone" /> @Html.DisplayNameFor(model => model.IsDone)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Vytvořit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="mt-1">
+    <a class="btn btn-dark btn-sm" asp-action="Index">Zpět</a>
+</div>
+
+@section Scripts {        
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="~/lib/Trumbowyg-main/dist/trumbowyg.js"></script>
+
+    <script>
+        $('#Description').trumbowyg();
+    </script>
+}

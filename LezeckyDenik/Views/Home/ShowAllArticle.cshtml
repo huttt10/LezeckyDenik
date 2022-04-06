@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Article>
+
+@{
+    ViewData["Title"] = "Zobrazí seznam všech článků";
+}
+
+<h1>Seznam všech napsaných článků</h1>
+
+
+<hr />
+
+<table class="table table-bordered table-striped" style="width:60%">
+    <thead>
+        <tr>
+            <th>
+                Název článku
+            </th>
+            <th>
+                Autor
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var obj in Model)
+        {
+            <tr>
+                <td>
+                    <a class="btn btn-secondary btn-sm" asp-controller="Home" asp-action="Article" asp-route-title="@obj.Title">@obj.Title</a>
+                </td>
+                <td>
+                    @obj.User.UserName
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+<div>
+    <a class="btn btn-dark" asp-action="Index">Zpět</a>
+</div>
+

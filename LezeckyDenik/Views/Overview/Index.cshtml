@@ -1,0 +1,191 @@
+﻿@model OverviewViewModel
+@{
+    ViewData["Title"] = "Přehled na měsíc: ";
+    ViewData["LineChart"] = "Počet splněných cílů za měsíc";
+}
+
+<h1>@ViewData["Title"] @DateTime.Now.ToString("MMMM", new System.Globalization.CultureInfo("cs-CZ"))</h1>
+
+
+<div class="row">
+    <div class="col-6">
+@if(!Model.Records.Count<Record>().Equals(0))
+{    
+        <table class="table table table-bordered" style="width:60%">
+        <thead>
+            <tr>
+                <th>
+                    Název
+                </th>
+                <th>
+                    Obtížnost
+                </th>
+                <th>
+                    Datum vylezení
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var obj in Model.Records)
+            {
+                <tr>
+                    <td>
+                        @obj.Name
+                    </td>
+                    <td>
+                        @obj.Difficulty
+                    </td>
+                    <td>
+                        @obj.DateRecord.ToString("d/M/yyyy");
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<div>
+@if (!Model.Training.Count<Training>().Equals(0))
+{
+    <h4>Dnešní trénink</h4>
+    <table class="table table table-bordered table-striped" style="width:90%">
+        <thead>
+            <tr>
+                <th>
+                    Zaměření
+                </th>
+                <th>
+                    Popis
+                </th>
+                <th>
+                    Čas
+                </th>
+                <th>
+                    Splněno
+                </th>
+                <th>
+                    Detail
+                </th>
+            </tr>
+        </thead>
+        @foreach (var obj in Model.Training)
+        {
+            <tr>
+                <td>
+                    @obj.Focus
+                </td>
+                <td>
+                    <div class="set-column-max">
+                        @Html.Raw(@obj.Description)
+                    </div>                    
+                </td>
+                <td>
+                    @obj.Time.ToString("H:mm")
+                </td>
+                <td class="d-flex justify-content-center">
+                    @if (obj.IsDone == true)
+                    {
+                        <i class="bi bi-check-lg"></i>
+                    }
+                    else
+                    {
+                        <i class="bi bi-x-lg"></i>
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-dark" asp-controller="Training" asp-action="Details" asp-route-id="@obj.Id"><i class="bi bi-eye"></i></a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+    </div>
+</div>
+
+
+<div class="col-6">
+  <div>
+@if(!Model.Goal.Count<Goal>().Equals(0))
+{               
+    <h4>Cíle tento měsíc</h4>
+<table class="table table table-bordered table-striped" style="width:80%">
+<thead>
+    <tr>
+        <th>
+            Stanovený průměr
+        </th>
+        <th>
+            Nejvyšší 
+        </th>
+        <th>
+            Stanovený počet vylezených cest
+        </th>
+        <th>
+            Splněno
+        </th>
+    </tr>
+</thead>
+    @foreach(var obj in Model.Goal)
+    {           
+        <tr>
+            <td>
+                @obj.Average
+            </td>
+            <td>
+                @obj.Highest
+            </td>
+            <td>
+                @obj.Count
+            </td>
+            <td class="d-flex justify-content-center">
+                @if (obj.Achieved == true)
+                {
+                    <i class="bi bi-check-lg"></i>
+                }
+                else
+                {
+                    <i class="bi bi-x-lg"></i>
+                }
+            </td>
+        </tr>
+    }
+    </table>
+}
+</div>
+
+<div>
+    @if(Model.AllGoals != 0)
+    {
+       <table class="table table table-bordered table-striped" style="width:80%">
+         <thead>
+            <tr>
+                <th>
+                    Splněno měsíčních cílů
+                </th>
+                <th>
+                    Všechny cíle
+                </th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+                <td>
+                    @Model.DoneGoals
+                </td>
+                <td>
+                    @Model.AllGoals
+                </td>
+            </tr>
+         </tbody>
+      </table>
+    }
+</div>
+            
+    @if(Model.GoalMonthAndCount != null)
+    {
+        <div>            
+                @Html.Partial("_LineChart", Model.GoalMonthAndCount)            
+        </div>
+    }
+    </div>
+</div>

@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Admin";
+}
+
+<h2>Administrátorský panel</h2>
+
+<div>
+    <ul>    
+        <li>
+            <div class="mt-1">
+                <a class="btn btn-primary btn-sm" asp-controller="Admin" asp-action="CreateArticle">Přidat článek</a>
+            </div>
+        </li>
+        <li>
+            <div class="mt-1">
+                <a class="btn btn-primary btn-sm" asp-controller="Admin" asp-action="ShowArticle">Zobrazit napsané články a případně je editovat nebo smazat</a>
+            </div>
+        </li>
+        @if(User.IsInRole(Role.RoleSuperAdmin) || User.IsInRole(Role.RoleAdmin))
+        {
+        <li>
+            <div class="mt-1">
+                <a class="btn btn-primary btn-sm" asp-controller="Admin" asp-action="EditMainPage" asp-route-title="Home">Editovat úvodní stránku</a>
+            </div>
+        </li>
+        <li>
+            <div class="mt-1">
+                <a class="btn btn-primary btn-sm" asp-controller="Admin" asp-action="ShowRoles" >Nastavit role uživatelům</a>
+            </div>
+        </li>
+        }
+    </ul>
+</div>
+
+

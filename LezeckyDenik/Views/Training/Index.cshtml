@@ -1,0 +1,103 @@
+﻿@model IEnumerable<LezeckyDenik.Models.Training>
+
+@{
+    ViewData["Title"] = "Trénink";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Vytvořit novou tréninkovou jednotku</a>
+</p>
+<div class="col-md-3">
+        <form asp-action="Index" method="get">
+            <div class="form-actions no-color">                
+                    Hledat v popisu: <input type="text" name="Search" value="@ViewData["CurrentFilter"]" />
+
+                    <div col-md-3>                    
+                        <input type="date" name="searchDate" value="@DateTime.Today" class="form-control" />
+                        <input type="submit" value="Vyhledat" class="btn btn-primary" />
+                    
+                        <a class="btn btn-secondary" asp-action="Index">Zobrazit celý seznam</a>                
+                    </div>
+            </div>
+        </form>
+    </div>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>                
+                <div>
+                    <a class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" asp-action="Index" asp-route-sortOrder="ShowAll">
+                    @Html.DisplayNameFor(model => model.Date)
+                    </a>
+
+                  <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <a class="dropdown-item" asp-action="Index" asp-route-sortOrderDate="OrderByDateYear">Od začátku tohoto roku</a>
+                    <a class="dropdown-item" asp-action="Index" asp-route-sortOrderDate="OrderByIsDateMonth">Od začátku tohoto měsíce</a>
+                    <a class="dropdown-item" asp-action="Index" asp-route-sortOrderDate="OrderByIsDateOlder">Od nejstarších</a>
+                  </div>
+                </div>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Focus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Time)
+            </th>
+            <th>                
+                <div>
+                    <a class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" asp-action="Index" asp-route-sortOrder="ShowAll">
+                    @Html.DisplayNameFor(model => model.IsDone)
+                    </a>
+
+                  <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <a class="dropdown-item" asp-action="Index" asp-route-sortOrderIsDone="OrderByIsDoneTrue">Splněno</a>
+                    <a class="dropdown-item" asp-action="Index" asp-route-sortOrderIsDone="OrderByIsDoneFalse">Nesplněno</a>
+                  </div>
+                </div>
+            </th>
+            <th class="col-sm-2">Editovat | Detail | Smazat</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) 
+{
+        <tr>
+            <td>
+                @item.Date.ToString("d/M/yyyy")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Focus)
+            </td>
+            <td>
+                <div class="set-column-max">                    
+                   @Html.Raw(item.Description)
+                </div>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            <td class="d-flex justify-content-center">                
+                @if (item.IsDone == true)
+                {
+                    <i class="bi bi-check-lg"></i>
+                }
+                else
+                {
+                    <i class="bi bi-x-lg"></i>
+                }       
+            </td>
+            <td>
+                <a class="btn btn-dark" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a> |
+                <a class="btn btn-dark" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i></a> |
+                <a class="btn btn-dark" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash3"></i></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
