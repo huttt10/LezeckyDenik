@@ -1,6 +1,7 @@
 ﻿using LezeckyDenik.Models;
 using LezeckyDenik.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Security.Claims;
 
 namespace LezeckyDenik.Controllers
@@ -68,7 +69,6 @@ namespace LezeckyDenik.Controllers
 
             foreach (var item in columnsOfDDate)
             {
-                ListOfDates.Add(item.ToString("d/M/yyyy"));
             }
             
             Dictionary<string, int> DatesAndCounts = new Dictionary<string, int>();

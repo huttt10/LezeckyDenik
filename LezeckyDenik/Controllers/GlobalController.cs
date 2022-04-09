@@ -1,5 +1,6 @@
 ﻿using LezeckyDenik.Models;
 using LezeckyDenik.Repository.IRepository;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -73,6 +74,7 @@ namespace LezeckyDenik.Controllers
                     AvarageAndCounts.Add(column.ToString(), 1);
                 }
             }
+
             return AvarageAndCounts;
         }
 
@@ -100,6 +102,7 @@ namespace LezeckyDenik.Controllers
                     DatesAndCounts.Add(column, 1);
                 }
             }
+
             return DatesAndCounts;
         }
     }
