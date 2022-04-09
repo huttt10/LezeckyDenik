@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "qa6AmX6ajyJqJ1ynwH9YnJi57PtirBDj3+zChj/5V9w=",
+  "Hash": "luKZanzlVkoSl+ynU0Re1l30Air1B1tw0rnd9Ct081g=",
   "Source": "LezeckyDenik",
   "BasePath": "_content/LezeckyDenik",
   "Mode": "Default",
@@ -1154,23 +1154,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
-    },
-    {
-      "Identity": "C:\\Users\\jakub\\OneDrive\\LezeckyDenik\\LezeckyDenik\\wwwroot\\js\\summernote-bs5.js",
-      "SourceId": "LezeckyDenik",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\jakub\\OneDrive\\LezeckyDenik\\LezeckyDenik\\wwwroot\\",
-      "BasePath": "_content/LezeckyDenik",
-      "RelativePath": "js/summernote-bs5.js",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\summernote-bs5.js"
     },
     {
       "Identity": "C:\\Users\\jakub\\OneDrive\\LezeckyDenik\\LezeckyDenik\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",

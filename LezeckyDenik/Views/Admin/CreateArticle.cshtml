@@ -23,8 +23,11 @@
 @section Scripts {        
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="~/lib/Trumbowyg-main/dist/trumbowyg.js"></script>
+    <script type="text/javascript" src="~/lib/Trumbowyg-main/dist/langs/cs.js"></script>
 
     <script>
-        $('#editor').trumbowyg();
+        $('#editor').trumbowyg({
+    lang: 'cs'
+    });
     </script>
 }
