@@ -29,6 +29,7 @@ namespace LezeckyDenik.Models
             set { _modifyDifficulty = value; }
         }
 
+        [Required]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:d}")]
         [Display(Name = "Datum vylezení")]

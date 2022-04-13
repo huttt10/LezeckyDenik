@@ -69,6 +69,7 @@ namespace LezeckyDenik.Controllers
 
             foreach (var item in columnsOfDDate)
             {
+                ListOfDates.Add(item.ToString("d/M/yyyy"));
             }
             
             Dictionary<string, int> DatesAndCounts = new Dictionary<string, int>();

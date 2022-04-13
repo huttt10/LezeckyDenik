@@ -10,11 +10,11 @@ namespace LezeckyDenik.Models
         public string? UserId { get; set; }
         [ForeignKey("UserId")]
         [ValidateNever]
-        public ApplicationUser User { get; set; }
+        public ApplicationUser? User { get; set; }
 
-        public string Average { get; set; }
+        public string? Average { get; set; }
 
-        public string Highest { get; set; }        
+        public string? Highest { get; set; }        
 
         public int Count { get; set; }
     }

@@ -1,12 +1,15 @@
 ﻿using LezeckyDenik.Models;
 using LezeckyDenik.Models.ViewModels;
 using LezeckyDenik.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Dynamic;
 
+
 namespace LezeckyDenik.Controllers
-{    
+{
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

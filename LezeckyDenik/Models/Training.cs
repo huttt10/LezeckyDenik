@@ -34,7 +34,6 @@ namespace LezeckyDenik.Models
         [Display(Name = "Splněno")]
         public bool IsDone { get; set; }
 
-
         public string? UserId { get; set; }
         [ForeignKey("UserId")]
         [ValidateNever]

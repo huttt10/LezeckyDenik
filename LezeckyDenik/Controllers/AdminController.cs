@@ -107,12 +107,15 @@ namespace LezeckyDenik.Controllers
         
         public IActionResult EditArticle(int? id)
         {
-            if(id == null)
+            var claimIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var article = _unitOfWork.Article.GetFirstOrDefault(x => x.Id == id);
+            var article = _unitOfWork.Article.GetFirstOrDefault(x => x.Id == id && x.UserId == claim.Value);
 
 
             
@@ -121,7 +124,10 @@ namespace LezeckyDenik.Controllers
 
         public IActionResult DeleteArticle(int? id)
         {
-            var obj = _unitOfWork.Article.GetFirstOrDefault(x => x.Id == id);
+            var claimIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            var obj = _unitOfWork.Article.GetFirstOrDefault(x => x.Id == id && x.UserId == claim.Value);
 
             if (obj == null)
             {

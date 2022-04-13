@@ -6,6 +6,7 @@ using LezeckyDenik.Utility;
 using LezeckyDenik.Repository.IRepository;
 using LezeckyDenik.Repository;
 using LezeckyDenik.Models;
+using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 
 builder.Services.AddDefaultIdentity<ApplicationUser>().AddRoles<IdentityRole>().AddDefaultTokenProviders()
 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.AddAuthorization(options =>
+{
+    options.FallbackPolicy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build();
+});
 
 builder.Services.AddSingleton<IEmailSender, EmailSender>();
 //builder.Services.AddScoped<IUserService, UserService>();
