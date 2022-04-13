@@ -64,7 +64,7 @@ namespace LezeckyDenik.Controllers
                 {
                     i = item.Month - 1;
                 }
-                if(months[i] != item.Month)
+                if(months[i] != item.Month && !ListOfDates.Contains(czInfo.MonthNames[i]))
                 {
                     ListOfDates.Add(czInfo.MonthNames[i]);
                     ListOfDateWhereNotGoal.Add(czInfo.MonthNames[i]);
