@@ -44,36 +44,26 @@ namespace LezeckyDenik.Controllers
             var claim = claimIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
             var columssOfDate = _unitOfWork.Goal.GetAll().Where(x => x.UserId == claim.Value).Select(x => x.Month).OrderBy(x => x.Date);
-
-            if(!columssOfDate.Any())
-            {
-                return null;
-            }
+            var noGoals = _unitOfWork.Goal.GetAll().Where(x => x.UserId == claim.Value && x.Achieved == false).Select(x => x.Month).OrderBy(x => x.Date);
 
             List<string> ListOfDates = new List<string>();
             List<string> ListOfDateWhereNotGoal = new List<string>();
-            int[] months = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
-            var goal = _unitOfWork.Goal.GetFirstOrDefault(x => x.UserId == claim.Value);
-            int i = 0;
-            CultureInfo czCulture = new CultureInfo("cs-CZ");
-            DateTimeFormatInfo czInfo = czCulture.DateTimeFormat;                        
-            
-            foreach (var item in columssOfDate)
-            {
-                if (i == 0)
+
+            DateTime startDate = columssOfDate.Min();
+            DateTime endDate = columssOfDate.Max();
+
+            while (startDate <= endDate)
+            {   
+                if(columssOfDate.Contains(startDate) && !noGoals.Contains(startDate))
                 {
-                    i = item.Month - 1;
-                }
-                if(months[i] != item.Month && !ListOfDates.Contains(czInfo.MonthNames[i]))
-                {
-                    ListOfDates.Add(czInfo.MonthNames[i]);
-                    ListOfDateWhereNotGoal.Add(czInfo.MonthNames[i]);
+                    ListOfDates.Add(startDate.ToString("MMMM", new CultureInfo("cs-CZ")));
                 }
                 else
                 {
-                    ListOfDates.Add(item.ToString("MMMM", new CultureInfo("cs-CZ")));
+                    ListOfDates.Add(startDate.ToString("MMMM", new CultureInfo("cs-CZ")));
+                    ListOfDateWhereNotGoal.Add(startDate.ToString("MMMM", new CultureInfo("cs-CZ")));
                 }
-                i++;
+                startDate = startDate.AddMonths(1);
             }
 
             Dictionary<string, int> DatesAndGoals = new Dictionary<string, int>();
@@ -100,3 +90,6 @@ namespace LezeckyDenik.Controllers
         }
     }
 }
+
+
+
